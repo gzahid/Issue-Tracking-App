@@ -17,15 +17,16 @@ This app tracks issues using local browser storage.
         </ul>
     </li>
     <li>The app will not clear storage automatically. You need to clear cache to see new features. You will also lose your tasks.
-        <br> localStorage.clear
-        <p> Single directive
-            Clear-Site-Data: "cache"
+        ```
+            - localStorage.clear
+            Single directive
+            - Clear-Site-Data: "cache"
 
-             Multiple directives (comma separated)
-            Clear-Site-Data: "cache", "cookies"
+            Multiple directives (comma separated)
+            - Clear-Site-Data: "cache", "cookies"
 
-             Wild card
-            Clear-Site-Data: "*"
-        </p>
+            Wild card
+            - Clear-Site-Data: "*"
+        ```
     </li>
 </ul>
