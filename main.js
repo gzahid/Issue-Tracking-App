@@ -359,4 +359,113 @@ const setInputInvalidState = (input, msg) => {
     }
   }
   
+  // Create function to handle the "blur" event of form unputs
+const handleFieldBlur = (e) => {
+    if (checkInput(e)) {
+      const sanitizedInput = DOMPurify.sanitize(e.value)
+      const trimmedInput = validator.trim(sanitizedInput)
+      const escapedInput = validator.escape(trimmedInput)
+  
+  
+      formInputs[e.id].sanitizedValue = escapedInput
+      enableSubmitIfInputsValid()
+    }
+  }
+  
+  
+  
+  
+  // Create function to handle the "input" event of form unputs
+  const handleFieldInput = (e) => {
+    if (checkInput(e)) {
+      enableSubmitIfInputsValid()
+    }
+  }
+  
+  
+  
+  
+  // Create function to handle the "click" event of modal close buttons
+  const handleModalClose = (e) => {
+    form.reset()
+    feedbackElements.forEach((el) => el.style.display = "none")
+    formSubmit.setAttribute('disabled', '')
+  }
+  
+  
+  
+  
+  // Clear all active issues
+  const clearActiveIssues = () => {
+    localStorage.setItem('issueLogger.issues', '[]')
+    updateTeamData()
+    updateTeamDataDOM()
+    deleteActiveIssuesDOM()
+  }
+  
+  
+  
+  
+  // Create function to handle the submit event on the form
+  const handleSubmit = (e) => {
+    e.preventDefault()
+  
+    const issue = {
+      issueSummary: formInputs[issueSummaryId].sanitizedValue,
+      issueDescription: formInputs[issueDescriptionId].sanitizedValue,
+      assignTo: formInputs[assignToId].sanitizedValue,
+      issuePriority: formInputs[issuePriorityId].sanitizedValue,
+      issueStatus: formInputs[issueStatusId].sanitizedValue,
+      dateAssigned: formInputs[dateAssignedId].sanitizedValue,
+      dueDate: formInputs[dueDateId].sanitizedValue
+    }
+  
+    const issueWithId = updateActiveIssues(issue)
+    updateActiveIssuesDOM(issueWithId.id)
+  
+    updateTeamData(issueWithId.assignTo)
+    updateTeamDataDOM(issueWithId.assignTo)
+  
+    form.reset()
+    formSubmit.setAttribute('disabled', '')
+  }
+  
+  /*
+   Check if DOM's readyState is "complete", then call the initDataStorage
+   and hydrateTeamElementsDOM functions
+*/
+document.onreadystatechange = (e) => {
+    if (document.readyState === "complete") {
+      initDataStorage()
+      hydrateTeamElementsDOM()
+    }
+  }
+  
+  // Attach all event listeners
+  clearIssuesBtn.addEventListener('click', clearActiveIssues)
+  
+  modalDismissBtns.forEach((btn) => btn.addEventListener('click', handleModalClose))
+  
+  issueSummary.addEventListener('input', (e) => handleFieldInput(e.target))
+  issueSummary.addEventListener('blur', (e) => handleFieldBlur(e.target))
+  
+  issueDescription.addEventListener('input', (e) => handleFieldInput(e.target))
+  issueDescription.addEventListener('blur', (e) => handleFieldBlur(e.target))
+  
+  assignTo.addEventListener('input', (e) => handleFieldInput(e.target))
+  assignTo.addEventListener('blur', (e) => handleFieldBlur(e.target))
+  
+  dateAssigned.addEventListener('input', (e) => handleFieldInput(e.target))
+  dateAssigned.addEventListener('blur', (e) => handleFieldBlur(e.target))
+  
+  dueDate.addEventListener('input', (e) => handleFieldInput(e.target))
+  dueDate.addEventListener('blur', (e) => handleFieldBlur(e.target))
+  
+  issuePriority.addEventListener('input', (e) => handleFieldInput(e.target))
+  issuePriority.addEventListener('blur', (e) => handleFieldBlur(e.target))
+  
+  issueStatus.addEventListener('input', (e) => handleFieldInput(e.target))
+  issueStatus.addEventListener('blur', (e) => handleFieldBlur(e.target))
+  
+  form.addEventListener('submit', (e) => handleSubmit(e))
   
