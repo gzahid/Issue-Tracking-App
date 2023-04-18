@@ -1,0 +1,14 @@
+{
+  "name": "issue-tracking-app",
+  "version": "1.0.0",
+  "description": "This app tracks issues using local browser storage",
+  "scripts": {
+    "sass:dev": "sass --watch --style=expanded --no-source-map style.scss:css/style.css",
+    "sass:prod": "sass --style=compressed --no-source-map style.scss:css/style.css"
+  },
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "sass": "^1.57.1"
+  }
+}
