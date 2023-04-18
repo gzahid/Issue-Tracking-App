@@ -4,8 +4,8 @@ This app tracks issues using local browser storage.
 
 ### Features: 
 - SCSS is available. 
-- Run ````sh yarn install ``` to setup SCSS 
-- Run yarn ```sh sass:dev ``` to execute and recreate CSS
+- Run ``` yarn install ``` to setup SCSS 
+- Run yarn ``` sass:dev ``` to execute and recreate CSS
 
 
 ## Issues: 
