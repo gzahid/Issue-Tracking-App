@@ -8,7 +8,7 @@ This app tracks issues using local browser storage.
 ## Issues: 
 <ul>
     <li>The app only works in chrome and safari. The import functionality of ES6 is not working in the firsfox and other browsers. 
-    ##### Fix:
+    <br> Fix:
         <ul> 
             <li> replace import with fetch </li>   
         </ul>
